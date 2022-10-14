@@ -9,4 +9,9 @@ for x in range(2):  # 1-й способ
                 flag = True
             else:
                 flag = False
+                break
             print(x, y, z, flag)
+if flag == True:
+    print('Равенство истинно')
+else:
+    print('Равенство ложно')
