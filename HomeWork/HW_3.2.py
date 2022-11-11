@@ -9,6 +9,7 @@ a = [2, 3, 4, 5, 6]
 b = []
 for i in range(math.ceil(len(a)/2)):
     para = 1
-    para = para*a[i]*a[len(a)-1-i]
+    para = para*a[i]*a[-1-i]
     b.append(para)
 print(b)
+
