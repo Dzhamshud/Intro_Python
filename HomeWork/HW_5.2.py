@@ -66,6 +66,9 @@ def play_bot(total):  # Игра с ботом
             if total <=0:
                 print('Игрок победил!')
                 break
+        else:
+            print('Введите корректное число! Переход хода.')
+            continue
         if total//28 >0 and total !=28:
             move_bot = int((total-29)%28)
             if 1<=move_bot<=28:
@@ -91,8 +94,41 @@ def play_bot(total):  # Игра с ботом
                 print(f'Ход бота равен {move_bot}')
                 print(f'Осталось {total} конфет')
 
+def play_bot_new(total):  # Игра с ботом, где бот всегда выигрывает
+    print(f'Всего есть {total} конфет(а), выигрывает тот кто забирёт последние.')
+    move_bot_first = total%29
+    total -= move_bot_first
+    print(f'Ход бота равен {move_bot_first}')
+    print(f'Осталось {total} конфет')
+    while total>0:
+        move_player = int(input('Ход игрока. Введите число от 1 до 28: '))
+        if 1<=move_player<=28:
+            total = total - move_player
+            print(f'Осталось {total} конфет')
+            if total <=0:
+                print('Игрок победил!')
+                break
+        else:
+            print('Введите корректное число! Переход хода.')
+            continue
+        if total>29:
+            move_bot = int(29-move_player)
+            total -= move_bot
+            print(f'Ход бота равен {move_bot}')
+            print(f'Осталось {total} конфет')
+        else:
+            if total <29:
+                move_bot = total
+                total -= move_bot
+                print(f'Ход бота равен {move_bot}')
+                print(f'Осталось {total} конфет')
+                print('Бот победил!')
+                break
+
+
 if draw(name1, name2) !=0:
     name2, name1 = name1, name2
 play(name1, name2, 2021)
-play_bot(121)
+# play_bot(121)
+play_bot_new(250)
 
