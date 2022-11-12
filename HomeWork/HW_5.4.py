@@ -1,21 +1,37 @@
 # Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
 
-# string = 'aaaaabbbbccccююююfffggggggggg'
-string = 'aabbbc'
-str_list = list(string)
-print(str_list)
-new_string = ''
-for elem in range(len(str_list)-1):
-    print(str_list[elem], end='')
-    print(str_list[elem+1], end='')
-#     counter = 1
-#     if str_list[elem] == str_list[elem+1]:
-#         counter +=1
-#     else:
-#         elem_end = str_list[elem]
-#         if counter >1:
-#             print(counter)
-#             new_string = new_string + str(counter)
-#         new_string = new_string + str(elem_end)
-# print(new_string)
-        
+string = 'aaaaabbbbccccююююfffggggggggg'
+# string = 'aabbbc'
+print(f'Исходная строка: {string}')
+def rle_compression(text):
+    text_compression = ''
+    counter = 1
+    symbol = ''
+    for char in string:
+        if char != symbol:
+            if symbol:
+                text_compression += str(counter) + symbol
+            counter = 1
+            symbol = char
+        else:
+            counter += 1
+    else:
+        text_compression += str(counter) + symbol
+        return text_compression
+
+
+
+def rle_decompression(text):
+    text_decompression = ''
+    counter = ''
+    for char in text:
+        if char.isdigit():
+            counter = int(char)
+        else:
+            text_decompression += char*counter
+            counter = ''
+    return text_decompression
+
+print(f'Сжатие: {rle_compression(string)}')
+new_text = rle_compression(string)
+print(f'Восстановление: {rle_decompression(new_text)}')
